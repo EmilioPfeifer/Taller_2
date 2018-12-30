@@ -8,7 +8,7 @@
       <v-spacer></v-spacer>
       <v-btn
         flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        href=""
         target="_blank"
       >
         <span class="mr-2">Latest Release</span>
@@ -16,7 +16,7 @@
     </v-toolbar>
 
     <v-content>
-      <HelloWorld/>
+      <router-view/>
     </v-content>
   </v-app>
 </template>
