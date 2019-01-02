@@ -19,24 +19,39 @@
 import Users from '@/components/User'
 import Formulario from '@/components/Formulario'
 import usuariosJson from '@/Datos/items.json'
-  export default {
-    data () {
-        return {
 
-        }
-    },
-    components: {
-        Users,
-        Formulario
-    },
+import {EventBus} from '@/plugins/event-bus.js'
+
+  export default {
     data () {
         return {
             mostrar: false,
             datos: usuariosJson,
             show: false
         }
+    },
+    created() {
+        EventBus.$on('newCliente', newCliente => {
+            if (newCliente.nombre!=null) {
+                this.add(newCliente);
+                this.show = false;
+            }
+        });
+    },
+    components: {
+        Users,
+        Formulario
+    },
+    methods: {
+        add(item){
+            this.datos.push({
+                nombre: item.nombre,
+                apellido: item.apellido,
+                edad: item.edad
+            });
+        }
     }
-  }
+  } 
 </script>
 <style>
     #formulario {

@@ -7,7 +7,7 @@
           </v-btn>
         </template>
   </b-table>
-  
+
   <v-dialog v-model="dialog" max-width="500">
     <v-card>
       <v-card-title class="headline">{{ modalVerficar.title}}</v-card-title>
@@ -37,8 +37,8 @@ export default {
   data () {
     return {
       fields:[
-        { key: 'first_name', label: 'Nombre'},
-        { key: 'age', label: 'Edad'},
+        { key: 'nombre', label: 'Nombre'},
+        { key: 'edad', label: 'Edad'},
         { key: 'boton', label: '' }
       ],
       modalVerficar: { title: '', content: '' },
@@ -51,11 +51,11 @@ export default {
   },
   methods: {
     verficar (item, index, button) {
-      this.modalVerficar.title = `${item.first_name} ${item.last_name}`
-      this.modalVerficar.content = "Seguro de que Desea Eliminar a este Cliente?"
-      this.$root.$emit('bv::show::modal', 'modalVerficar', button)
-      this.auxIndex = index
-      this.dialog = true
+      this.modalVerficar.title = `${item.nombre} ${item.apellido}`;
+      this.modalVerficar.content = "Seguro de que Desea Eliminar a este Cliente?";
+      this.$root.$emit('bv::show::modal', 'modalVerficar', button);
+      this.auxIndex = index;
+      this.dialog = true;
       //items.splice(row.index)
       //JSON.stringify(item, null, 1)
     },

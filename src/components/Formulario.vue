@@ -12,17 +12,23 @@
         </b-form-input>
       </b-form-group>
 
-      <b-form-group id="InputGroup3" label="Mascata:" label-for="Input3">
-        <b-form-select id="Input3" :options="mascotas" required v-model="newCliente.mascota">
+      <b-form-group id="InputGroup3" label="Edad:" label-for="Input3">
+        <b-form-input id="Input3" type="text" v-model="newCliente.edad" required placeholder="Ingresar Edad de nuevo Cliente">
+        </b-form-input>
+      </b-form-group>
+
+      <b-form-group id="InputGroup4" label="Mascata:" label-for="Input4">
+        <b-form-select id="Input4" :options="mascotas" required v-model="newCliente.mascota">
         </b-form-select>
       </b-form-group>
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="submit" variant="primary" @click="emitirNewCliente">Submit</b-button>
       <b-button type="reset" variant="danger">reset</b-button>
     </b-form>
   </div>
 </template>
 
 <script>
+import { EventBus } from '@/plugins/event-bus.js';
 export default {
   data () {
     return {
@@ -41,13 +47,17 @@ export default {
   methods: {
     onSubmit (evt) {
       evt.preventDefault();
-      alert(JSON.stringify(this.newCliente));
+      this.onReset(evt);
     },
     onReset (evt) {
       evt.preventDefault();
       this.newCliente.nombre = '';
       this.newCliente.apellido = '';
+      this.newCliente.edad = '';
       this.newCliente.mascota = null;
+    },
+    emitirNewCliente(){
+      EventBus.$emit('newCliente', this.newCliente);
     }
   }
 }
