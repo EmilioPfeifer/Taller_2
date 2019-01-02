@@ -2,56 +2,33 @@
 <b-container>
   <b-table striped hover :fields="fields" :items="items">
     <template slot="boton" slot-scope="row">
-          <b-button size="sm" @click.stop="info(row.item, row.index, $event.target)">
+          <v-btn color="success" dark @click="verficar(row.item, row.index, $event.target)">
             Eliminar
-          </b-button>
+          </v-btn>
         </template>
   </b-table>
-  <b-modal id="modalVerficar" hide-footer :title="modalVerficar.title">
-      <pre>{{ modalVerficar.content }}</pre>
-      <b-btn class="mt-3" variant="outline-danger" block @click="hideModal()">Close Me</b-btn>
-  </b-modal>
+  
+  <v-dialog v-model="dialog" max-width="500">
+    <v-card>
+      <v-card-title class="headline">{{ modalVerficar.title}}</v-card-title>
 
-  <div class="text-xs-center">
-    <v-dialog
-      v-model="dialog"
-      width="500"
-    >
-      <v-btn
-        slot="activator"
-        color="red lighten-2"
-        dark
-      >
-        Click Me
-      </v-btn>
+      <v-card-text>
+        <pre>{{ modalVerficar.content }}</pre>
+      </v-card-text>
 
-      <v-card>
-        <v-card-title
-          class="headline grey lighten-2"
-          primary-title
-        >
-          Privacy Policy
-        </v-card-title>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="green darken-1" flat="flat" @click="dialog = false">
+          Cancelar
+        </v-btn>
+        <v-btn color="green darken-1" flat="flat" @click="revomeItem()">
+          Eliminar
+        </v-btn>
+      </v-card-actions>
+      
+    </v-card>
+  </v-dialog>
 
-        <v-card-text>
-          Lorem ipsum dolor sit amet.
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="primary"
-            flat
-            @click="dialog = false"
-          >
-            I accept
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </div>
 </b-container>
 </template>
 
@@ -65,25 +42,26 @@ export default {
         { key: 'boton', label: '' }
       ],
       modalVerficar: { title: '', content: '' },
-      dialog: false
+      dialog: false,
+      auxIndex: -1
     }
   },
   props: {
     items: Array
   },
   methods: {
-    showAlert(item){
-      alert(this.items[0])
-    },
-    info (item, index, button) {
+    verficar (item, index, button) {
       this.modalVerficar.title = `${item.first_name} ${item.last_name}`
       this.modalVerficar.content = "Seguro de que Desea Eliminar a este Cliente?"
       this.$root.$emit('bv::show::modal', 'modalVerficar', button)
+      this.auxIndex = index
+      this.dialog = true
       //items.splice(row.index)
       //JSON.stringify(item, null, 1)
     },
-    hideModal () {
-      this.$refs.modalVerficar.hide()
+    revomeItem(){
+      this.items.splice(this.auxIndex,1)
+      this.dialog = false
     }
   }
 }

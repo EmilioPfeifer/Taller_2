@@ -1,13 +1,16 @@
 <template>
 <div>
 
-    <div id="tablaUsuarios">
+    <div id="tablaUsuarios" class="text-center">
         <Users :items="datos"/>
-        <Formulario :show="mostrar"/>
+        <v-btn color="info" @click="show=true">agregar</v-btn>
     </div>
-    <div id="btns">
-        <v-btn color="info">agregar</v-btn>
-    </div>
+
+    <v-dialog v-model="show" max-width="500">
+        <v-card>
+            <Formulario id="formulario"/>
+        </v-card>
+    </v-dialog>
     
 </div>
 </template>
@@ -17,6 +20,11 @@ import Users from '@/components/User'
 import Formulario from '@/components/Formulario'
 import usuariosJson from '@/Datos/items.json'
   export default {
+    data () {
+        return {
+
+        }
+    },
     components: {
         Users,
         Formulario
@@ -24,7 +32,8 @@ import usuariosJson from '@/Datos/items.json'
     data () {
         return {
             mostrar: false,
-            datos: usuariosJson
+            datos: usuariosJson,
+            show: false
         }
     }
   }
@@ -32,7 +41,6 @@ import usuariosJson from '@/Datos/items.json'
 <style>
     #formulario {
         width: 500px;
-        margin: 50px;
         padding: 10px;
         border: solid #BDBDBD;
     }
