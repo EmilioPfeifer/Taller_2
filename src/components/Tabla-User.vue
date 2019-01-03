@@ -36,17 +36,13 @@
 export default {
   data () {
     return {
-      fields:[
-        { key: 'nombre', label: 'Nombre'},
-        { key: 'edad', label: 'Edad'},
-        { key: 'boton', label: '' }
-      ],
       modalVerficar: { title: '', content: '' },
       dialog: false,
       auxIndex: -1
     }
   },
   props: {
+    fields: Array,
     items: Array
   },
   methods: {
@@ -60,8 +56,8 @@ export default {
       //JSON.stringify(item, null, 1)
     },
     revomeItem(){
-      this.items.splice(this.auxIndex,1)
-      this.dialog = false
+      this.items.splice(this.auxIndex,1);
+      this.dialog = false;
     }
   }
 }

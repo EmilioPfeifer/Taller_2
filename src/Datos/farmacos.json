@@ -1,4 +1,13 @@
 [
-    {"nombre": "Galletero", "fechaAct": "16/17/18", "ultMov": "-", "cant": 0, "precio": 4.0, "iron": 1},
-    {"nombre": "Vigas", "fechaAct": "16/17/18", "ultMov": "-", "cant": 37, "precio": 4.3, "iron": 1}
+    { "nombre": "Omeprazol", "medida": 40, "precio": 0 },
+    { "nombre": "Verapanilo", "medida": 2.5, "precio": 0 },
+    { "nombre": "Valproato Sodico", "medida": 100, "precio": 0 },
+    { "nombre": "Tramadol", "medida": 50, "precio": 0 },
+    { "nombre": "Tiapride", "medida": 50, "precio": 0 },
+    { "nombre": "Sulfato de Magnesia", "medida": 150, "precio": 0 },
+    { "nombre": "Succinilcolina", "medida": 50, "precio": 0 },
+    { "nombre": "Somatostanina", "medida": 0.25, "precio": 0 },
+    { "nombre": "Salbutamol", "medida": 5, "precio": 0 },
+    { "nombre": "Rocuronio", "medida": 10, "precio": 0 },
+    { "nombre": "Tramadol", "medida": 50, "precio": 0 }
 ]

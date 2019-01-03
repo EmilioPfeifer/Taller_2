@@ -1,8 +1,8 @@
 <template>
-<div>
-
-    <div id="tablaUsuarios" class="text-center">
-        <Users :fields="fields" :items="datos"/>
+<v-container>
+    <div id="tabla" class="text-center">
+        <b-form-input type="text" v-model="search" placeholder="Buscar Farmaco..."/>
+        <Tabla :fields="fields" :items="filteredList"/>
         <v-btn color="info" @click="show=true">agregar</v-btn>
     </div>
 
@@ -11,51 +11,58 @@
             <Formulario id="formulario"/>
         </v-card>
     </v-dialog>
-    
-</div>
+</v-container>
 </template>
 
 <script>
-import Users from '@/components/Tabla-User'
-import Formulario from '@/components/Formulario'
-import usuariosJson from '@/Datos/items.json'
+import farmacosJson from '@/Datos/farmacos.json'
+import Tabla from '@/components/Tabla-Farmaco'
+import Formulario from '@/components/FormFarmaco'
 
 import {EventBus} from '@/plugins/event-bus.js'
 
-  export default {
+export default {
     data () {
         return {
+            search: '',
             fields:[
                 { key: 'nombre', label: 'Nombre'},
-                { key: 'edad', label: 'Edad'},
+                { key: 'medida', label: 'Medida (mg/ml)'},
                 { key: 'boton', label: '' }
             ],
-            datos: usuariosJson,
+            datos: farmacosJson,
             show: false
         }
     },
     created() {
-        EventBus.$on('newCliente', newCliente => {
-            if (newCliente.nombre!=null) {
-                this.add(newCliente);
+        EventBus.$on('newFarmaco', newFarmaco => {
+            if (newFarmaco.nombre!=null) {
+                this.add(newFarmaco);
                 this.show = false;
             }
         });
     },
     components: {
-        Users,
+        Tabla,
         Formulario
+    },
+    computed: {
+        filteredList() {
+        return this.datos.filter(post => {
+            return post.nombre.toLowerCase().includes(this.search.toLowerCase())
+        })
+        }
     },
     methods: {
         add(item){
             this.datos.push({
                 nombre: item.nombre,
-                apellido: item.apellido,
-                edad: item.edad
+                medida: item.medida,
+                precio: item.precio
             });
         }
     }
-  } 
+}
 </script>
 <style>
     #formulario {
@@ -63,7 +70,7 @@ import {EventBus} from '@/plugins/event-bus.js'
         padding: 10px;
         border: solid #BDBDBD;
     }
-    #tabla {
+    #tablaUsuarios {
         width: 750px;
         margin: auto;
         margin-top: 50px;

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Principal from './View/Principal'
 import TablaClientes from './View/Clientes'
-
+import TablaFarmacos from './View/Farmacos'
 Vue.use(Router)
 
 export default new Router({
@@ -16,8 +16,13 @@ export default new Router({
     },
     {
       path: '/Clientes',
-      name: 'Clients',
+      name: 'Clientes',
       component: TablaClientes
+    },
+    {
+      path: '/Lista-Farmacos',
+      name: 'Farmacos',
+      component: TablaFarmacos
     }
   ]
 })
