@@ -17,7 +17,7 @@
         </b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary" @click="emitirNewFarmaco">Agregar</b-button>
+      <b-button type="submit" variant="primary">Agregar</b-button>
       <b-button type="reset" variant="danger">Limpiar</b-button>
     </b-form>
   </div>
@@ -38,6 +38,7 @@ export default {
   methods: {
     onSubmit (evt) {
       evt.preventDefault();
+      this.emitirNewFarmaco();
       this.onReset(evt);
     },
     onReset (evt) {

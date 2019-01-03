@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import { EventBus } from '@/plugins/event-bus.js';
+
 export default {
   data () {
     return {
@@ -47,14 +49,14 @@ export default {
   },
   methods: {
     verficar (item, index, button) {
-      this.modalVerficar.title = `${item.nombre}`;
+      this.modalVerficar.title = `${item.nombre} ${item.medida} mg/ml`;
       this.modalVerficar.content = "Seguro de que Desea Eliminar este Farmaco?";
       this.$root.$emit('bv::show::modal', 'modalVerficar', button);
       this.auxIndex = index;
       this.dialog = true;
     },
     revomeItem(){
-      this.items.splice(this.auxIndex,1);
+      EventBus.$emit('removeItem', this.auxIndex);
       this.dialog = false;
     }
   }

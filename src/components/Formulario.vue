@@ -21,7 +21,7 @@
         <b-form-select id="Input4" :options="mascotas" required v-model="newCliente.mascota">
         </b-form-select>
       </b-form-group>
-      <b-button type="submit" variant="primary" @click="emitirNewCliente">Crear</b-button>
+      <b-button type="submit" variant="primary">Crear</b-button>
       <b-button type="reset" variant="danger">Limpiar</b-button>
     </b-form>
   </div>
@@ -47,6 +47,7 @@ export default {
   methods: {
     onSubmit (evt) {
       evt.preventDefault();
+      this.emitirNewCliente();
       this.onReset(evt);
     },
     onReset (evt) {

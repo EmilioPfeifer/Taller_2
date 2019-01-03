@@ -3,7 +3,7 @@
     <div id="tabla" class="text-center">
         <b-form-input type="text" v-model="search" placeholder="Buscar Farmaco..."/>
         <Tabla :fields="fields" :items="filteredList"/>
-        <v-btn color="info" @click="show=true">agregar</v-btn>
+        <v-btn color="info" @click="show=true">agregar farmaco</v-btn>
     </div>
 
     <v-dialog v-model="show" max-width="500">
@@ -30,7 +30,7 @@ export default {
                 { key: 'medida', label: 'Medida (mg/ml)'},
                 { key: 'boton', label: '' }
             ],
-            datos: farmacosJson,
+            lista: farmacosJson,
             show: false
         }
     },
@@ -41,6 +41,9 @@ export default {
                 this.show = false;
             }
         });
+        EventBus.$on('removeItem', auxIndex => {
+            this.lista.splice(auxIndex,1);
+        });
     },
     components: {
         Tabla,
@@ -48,14 +51,14 @@ export default {
     },
     computed: {
         filteredList() {
-        return this.datos.filter(post => {
+        return this.lista.filter(post => {
             return post.nombre.toLowerCase().includes(this.search.toLowerCase())
         })
         }
     },
     methods: {
         add(item){
-            this.datos.push({
+            this.lista.push({
                 nombre: item.nombre,
                 medida: item.medida,
                 precio: item.precio
@@ -70,7 +73,7 @@ export default {
         padding: 10px;
         border: solid #BDBDBD;
     }
-    #tablaUsuarios {
+    #tabla {
         width: 750px;
         margin: auto;
         margin-top: 50px;

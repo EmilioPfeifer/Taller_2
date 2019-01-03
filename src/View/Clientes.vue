@@ -3,7 +3,7 @@
 
     <div id="tablaUsuarios" class="text-center">
         <Users :fields="fields" :items="datos"/>
-        <v-btn color="info" @click="show=true">agregar</v-btn>
+        <v-btn color="info" @click="show=true">Nuevo Cliente</v-btn>
     </div>
 
     <v-dialog v-model="show" max-width="500">
@@ -63,7 +63,7 @@ import {EventBus} from '@/plugins/event-bus.js'
         padding: 10px;
         border: solid #BDBDBD;
     }
-    #tabla {
+    #tablaUsuarios {
         width: 750px;
         margin: auto;
         margin-top: 50px;
