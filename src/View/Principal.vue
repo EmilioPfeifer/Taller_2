@@ -3,7 +3,7 @@
     <v-layout column>
         <v-flex xs12>
             <Table :recetas="recetas"/>
-            <Opciones/>
+            <Opciones id="group"/>
         </v-flex>
     </v-layout>
     <v-dialog v-model="show" max-width="518">
@@ -62,5 +62,9 @@ export default {
         width: 500px;
         padding: 10px;
         border: solid #BDBDBD;
+    }
+    #group {
+        width: 220px;
+        padding: 10px;
     }
 </style>

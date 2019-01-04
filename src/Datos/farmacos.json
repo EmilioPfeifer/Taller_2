@@ -1,13 +1,13 @@
 [
-    { "nombre": "Omeprazol", "medida": 40, "precio": 0 },
-    { "nombre": "Verapanilo", "medida": 2.5, "precio": 0 },
-    { "nombre": "Valproato Sodico", "medida": 100, "precio": 0 },
-    { "nombre": "Tramadol", "medida": 50, "precio": 0 },
-    { "nombre": "Tiapride", "medida": 50, "precio": 0 },
-    { "nombre": "Sulfato de Magnesia", "medida": 150, "precio": 0 },
-    { "nombre": "Succinilcolina", "medida": 50, "precio": 0 },
-    { "nombre": "Somatostanina", "medida": 0.25, "precio": 0 },
-    { "nombre": "Salbutamol", "medida": 5, "precio": 0 },
-    { "nombre": "Rocuronio", "medida": 10, "precio": 0 },
-    { "nombre": "Tramadol", "medida": 50, "precio": 0 }
+    { "nombre": "Omeprazol", "medida": 40, "precio": 500 },
+    { "nombre": "Verapanilo", "medida": 2.5, "precio": 250 },
+    { "nombre": "Valproato Sodico", "medida": 100, "precio": 300 },
+    { "nombre": "Tramadol", "medida": 50, "precio": 1000 },
+    { "nombre": "Tiapride", "medida": 50, "precio": 1500 },
+    { "nombre": "Sulfato de Magnesia", "medida": 150, "precio": 3200 },
+    { "nombre": "Succinilcolina", "medida": 50, "precio": 5000 },
+    { "nombre": "Somatostanina", "medida": 0.25, "precio": 350 },
+    { "nombre": "Salbutamol", "medida": 5, "precio": 760 },
+    { "nombre": "Rocuronio", "medida": 10, "precio": 170 },
+    { "nombre": "Tramadol", "medida": 50, "precio": 3000 }
 ]

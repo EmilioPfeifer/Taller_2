@@ -19,10 +19,14 @@
         <v-card flat>
           <v-card-text>
             <b-table striped hover :fields="campos" :items="props.item.farmacos"></b-table>
+            <p style="background-color: #F2F2F2">Descripcion: <br/>{{ props.item.descrip }}<br/></p>
           </v-card-text>
         </v-card>
       </template>
     </v-data-table>
+    <template>
+      <b-alert show>Caja Acumulada: ${{ this.valorCaja }}</b-alert>
+    </template>
     </v-flex>
   </v-container>
 </template>
@@ -36,6 +40,7 @@ export default {
   data () {
     return {
       DBService: new DBService(),
+      valorCaja: 0,
       header: [
           {
           text: 'Receta',
@@ -44,11 +49,11 @@ export default {
           value: 'nombre'
           },
           { text: 'Cliente', value: 'cliente' },
-          { text: 'Precio', value: 'precio' }
+          { text: 'Precio ($)', value: 'precio' }
       ],
       campos:[
         { key: 'nombre', label: 'Nombre' },
-        { key: 'precio', label: 'Precio' }
+        { key: 'precio', label: 'Precio ($)' }
       ]
     }
   },
@@ -58,7 +63,18 @@ export default {
     },
     recetas () {
       return this.DBService.getRecetas();
+    },
+  },
+  methods: {
+    cajaAcumulada () {
+      this.recetas.forEach(element => {
+        this.valorCaja += element.precio;
+      });
     }
+  },
+  mounted() {
+    this.cajaAcumulada();
+    console.log(this.valorCaja);
   }
 }
 </script>

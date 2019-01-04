@@ -12,6 +12,11 @@
         </b-form-select>
       </b-form-group>
 
+      <b-form-group id="InputGroup4" label="Descripcion:" label-for="Input4">
+        <b-form-input id="Input4" type="text" v-model="newReceta.descrip" required placeholder="Ingresar leve Descripcion.">
+        </b-form-input>
+      </b-form-group>
+
       <b-form-group id="InputGroup3" label="Farmacos:" label-for="Input3">
         <div>
           <b-table :fields="campos" :items="listFarmacos">
@@ -22,6 +27,7 @@
           </b-table>
         </div>
       </b-form-group>
+
       <b-button type="submit" variant="primary">Crear</b-button>
       <b-button type="reset" variant="danger">Limpiar</b-button>
     </b-form>
@@ -46,7 +52,8 @@ export default {
         nombre: '',
         cliente: null,
         precio: 0,
-        farmacos: []
+        farmacos: [],
+        descrip: ''
       },
       clientes: [
         { text: 'Seleccionar Cliente', value: null }
@@ -72,6 +79,7 @@ export default {
       this.newReceta.cliente = null;
       this.newReceta.farmacos = null;
       this.newReceta.precio = '';
+      this.newReceta.descrip = '';
     },
     emitirNewReceta(){
       EventBus.$emit('newReceta', this.newReceta);
@@ -79,7 +87,7 @@ export default {
 
     generarLista(){
       this.farms.forEach(element => {
-        console.log(element);
+        //console.log(element);
         this.Farmaco.nombre = element.nombre;
         this.Farmaco.precio = element.precio;
         this.Farmaco.selected = false;
