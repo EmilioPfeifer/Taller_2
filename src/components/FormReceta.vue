@@ -13,8 +13,14 @@
       </b-form-group>
 
       <b-form-group id="InputGroup3" label="Farmacos:" label-for="Input3">
-        <b-form-select multiple id="Input4" :options="listFarmacos" required v-model="newReceta.farmacos">
-        </b-form-select>
+        <div>
+          <b-table :fields="campos" :items="listFarmacos">
+            <template slot="checks" slot-scope="row">
+              <b-form-checkbox v-model="row.item.selected">
+              </b-form-checkbox>
+            </template>
+          </b-table>
+        </div>
       </b-form-group>
       <b-button type="submit" variant="primary">Crear</b-button>
       <b-button type="reset" variant="danger">Limpiar</b-button>
@@ -30,22 +36,33 @@ export default {
   data () {
     return {
       DBService: new DBService(),
+      listFarmacos: [],
+      Farmaco: {
+        nombre:'',
+        precio:'',
+        selected : false
+      },
       newReceta: {
         nombre: '',
         cliente: null,
+        precio: 0,
         farmacos: []
       },
       clientes: [
         { text: 'Seleccionar Cliente', value: null }
       ],
-      listFarmacos: [
-          { text: 'Seleccionar Farmacos', value: null }
+      campos: [
+        { key: 'nombre', label: 'Nombre'},
+        { key: 'precio', label: 'Precio'},
+        //{ key: 'selected', label: 'selc'},
+        { key: 'checks', label: ''}
       ]
     }
   },
   methods: {
     onSubmit (evt) {
       evt.preventDefault();
+      this.obtenerSeleccion();
       this.emitirNewReceta();
       this.onReset(evt);
     },
@@ -58,23 +75,45 @@ export default {
     },
     emitirNewReceta(){
       EventBus.$emit('newReceta', this.newReceta);
+    },
+
+    generarLista(){
+      this.farms.forEach(element => {
+        console.log(element);
+        this.Farmaco.nombre = element.nombre;
+        this.Farmaco.precio = element.precio;
+        this.Farmaco.selected = false;
+        this.listFarmacos.push(JSON.parse(JSON.stringify(this.Farmaco)));
+        this.resetFarm();
+      });
+    },
+    obtenerSeleccion(){
+      this.listFarmacos.forEach(element => {
+        if (element.selected==true) {
+          this.newReceta.precio += element.precio;
+          this.newReceta.farmacos.push(element);
+        }
+      });
+    },
+    resetFarm() {
+      this.Farmaco.nombre = '';
+      this.Farmaco.precio = '';
+      this.Farmaco.selected = false;
     }
   },
   computed: {
     farms () {
-      return this.DBService.getFarmacos()
+      return this.DBService.getFarmacos();
     },
     clients () {
-      return this.DBService.getClients()
+      return this.DBService.getClients();
     }
   },
   mounted() {
-    this.farms.forEach(element => {
-      this.listFarmacos.push(element.nombre)
-    });
     this.clients.forEach(element => {
         this.clientes.push(element.nombre)
     });
+    this.generarLista();
   }
 }
 </script>

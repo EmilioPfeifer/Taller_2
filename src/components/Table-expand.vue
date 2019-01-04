@@ -18,7 +18,7 @@
       <template slot="expand" slot-scope="props">
         <v-card flat>
           <v-card-text>
-            <b-table striped hover :items="props.item.farmacos"></b-table>
+            <b-table striped hover :fields="campos" :items="props.item.farmacos"></b-table>
           </v-card-text>
         </v-card>
       </template>

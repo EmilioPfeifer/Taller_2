@@ -6,7 +6,7 @@
             <Opciones/>
         </v-flex>
     </v-layout>
-    <v-dialog v-model="show" max-width="500">
+    <v-dialog v-model="show" max-width="518">
         <v-card>
             <Form id="formulario"/>
         </v-card>
