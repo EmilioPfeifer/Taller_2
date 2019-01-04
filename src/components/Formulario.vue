@@ -35,8 +35,7 @@ export default {
       newCliente: {
         nombre: '',
         apellido: '',
-        mascota: null,
-        recetas : []
+        mascota: null
       },
       mascotas: [
         { text: 'Seleccionar Mascota', value: null },

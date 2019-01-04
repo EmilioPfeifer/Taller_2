@@ -21,7 +21,7 @@
         <v-btn color="green darken-1" flat="flat" @click="dialog = false">
           Cancelar
         </v-btn>
-        <v-btn color="green darken-1" flat="flat" @click="revomeItem()">
+        <v-btn color="green darken-1" flat="flat" @click="revomeClient()">
           Eliminar
         </v-btn>
       </v-card-actions>
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import { EventBus } from '@/plugins/event-bus.js';
+
 export default {
   data () {
     return {
@@ -55,8 +57,8 @@ export default {
       //items.splice(row.index)
       //JSON.stringify(item, null, 1)
     },
-    revomeItem(){
-      this.items.splice(this.auxIndex,1);
+    revomeClient(){
+      EventBus.$emit('removeClient', this.auxIndex);
       this.dialog = false;
     }
   }

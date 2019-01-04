@@ -19,6 +19,8 @@ import farmacosJson from '@/Datos/farmacos.json'
 import Tabla from '@/components/Tabla-Farmaco'
 import Formulario from '@/components/FormFarmaco'
 
+import DBService from '@/services/DBService'
+
 import {EventBus} from '@/plugins/event-bus.js'
 
 export default {
@@ -30,8 +32,16 @@ export default {
                 { key: 'medida', label: 'Medida (mg/ml)'},
                 { key: 'boton', label: '' }
             ],
+            DBService: new DBService(),
             lista: farmacosJson,
             show: false
+        }
+    },
+    mounted() {
+        if (this.farmacos.length==0) {
+            this.lista.forEach(element => {
+                this.add(element);
+            });   
         }
     },
     created() {
@@ -42,7 +52,7 @@ export default {
             }
         });
         EventBus.$on('removeItem', auxIndex => {
-            this.lista.splice(auxIndex,1);
+            this.DBService.removeFarmaco(auxIndex);
         });
     },
     components: {
@@ -50,19 +60,25 @@ export default {
         Formulario
     },
     computed: {
+        farmacos () {
+            return this.DBService.getFarmacos()
+        },
         filteredList() {
-        return this.lista.filter(post => {
-            return post.nombre.toLowerCase().includes(this.search.toLowerCase())
-        })
+            return this.farmacos.filter(item => {
+                return item.nombre.toLowerCase().includes(this.search.toLowerCase())
+            })
         }
     },
     methods: {
         add(item){
+            let vm = this;
+            vm.DBService.agregarFarmacos(JSON.parse(JSON.stringify(item)));
+            /*
             this.lista.push({
                 nombre: item.nombre,
                 medida: item.medida,
                 precio: item.precio
-            });
+            });*/
         }
     }
 }

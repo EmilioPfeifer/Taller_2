@@ -7,10 +7,10 @@
       <v-spacer></v-spacer>
       <v-btn
         flat
-        href=""
-        target="_blank"
+        href="/"
+        target=""
       >
-        <span class="mr-2">Latest Release</span>
+        <span class="mr-2">Volver</span>
       </v-btn>
     </v-toolbar>
 
