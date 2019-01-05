@@ -2,7 +2,7 @@
 <v-container fluid>
     <v-layout column>
         <v-flex xs12>
-            <Table :recetas="recetas"/>
+            <Table id="table" :recetas="recetas"/>
             <Opciones id="group"/>
         </v-flex>
     </v-layout>
@@ -18,9 +18,9 @@
 import {EventBus} from '@/plugins/event-bus.js'
 import DBService from '@/services/DBService'
 
-import Table from '@/components/Table-expand'
-import Opciones from '@/components/Lista-Opciones'
-import Form from '@/components/FormReceta'
+import Table from '@/components/Principal/Table-Recetas'
+import Opciones from '@/components/Principal/Lista-Opciones'
+import Form from '@/components/Principal/FormReceta'
 
 export default {
   components: {
@@ -41,6 +41,7 @@ export default {
     EventBus.$on('newReceta', newReceta => {
         this.add(newReceta);
         this.show = false;
+
     });
   },
   methods: {

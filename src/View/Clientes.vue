@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import Users from '@/components/Tabla-User'
-import Formulario from '@/components/Formulario'
+import Users from '@/components/Clientes/Tabla-Clientes'
+import Formulario from '@/components/Clientes/Formulario'
 import usuariosJson from '@/Datos/items.json'
 
 import DBService from '@/services/DBService'

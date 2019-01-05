@@ -16,8 +16,8 @@
 
 <script>
 import farmacosJson from '@/Datos/farmacos.json'
-import Tabla from '@/components/Tabla-Farmaco'
-import Formulario from '@/components/FormFarmaco'
+import Tabla from '@/components/Farmacos/Tabla-Farmacos'
+import Formulario from '@/components/Farmacos/FormFarmaco'
 
 import DBService from '@/services/DBService'
 
